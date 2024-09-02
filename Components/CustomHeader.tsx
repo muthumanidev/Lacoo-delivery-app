@@ -3,73 +3,82 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  TouchableOpacity,
   Image,
   TextInput,
 } from "react-native";
 import React, { useRef } from "react";
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { Link } from "expo-router";
 import BottomSheet from "./BottomSheet";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-const SearchBar = () => (
-  <View style={styles.searchContainer}>
-    <View style={styles.searchSection}>
-      <View style={styles.searchField}>
-        <FontAwesome5
-          name="search"
-          style={styles.searchIcon}
-          size={20}
-          color={Colors.medium}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Restaurants, groceries, dishes"
-        />
+const SearchBar = () => {
+  return (
+    <View style={styles.searchContainer}>
+      <View style={styles.searchSection}>
+        <View style={styles.searchField}>
+          <Ionicons
+            style={styles.searchIcon}
+            name="search-outline"
+            size={20}
+            color={Colors.medium}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Restaurants, groceries, dishes"
+          />
+        </View>
+        <Link href={"/(modal)/filter"} asChild>
+          <TouchableOpacity style={styles.optionButton}>
+            <Ionicons name="options-outline" size={20} color={Colors.primary} />
+          </TouchableOpacity>
+        </Link>
       </View>
-      <Link href={"/"} asChild>
-        <TouchableOpacity style={styles.optionButton}>
-          <Ionicons name="options-outline" size={20} color={Colors.primary} />
-        </TouchableOpacity>
-      </Link>
     </View>
-  </View>
-);
+  );
+};
 
 const CustomHeader = () => {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
-  const openmodal = () => {
+
+  const openModal = () => {
     bottomSheetRef.current?.present();
   };
-  return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={styles.safeArea}>
-        <BottomSheet ref={bottomSheetRef} />
-        <View style={styles.container}>
-          <TouchableOpacity onPress={openmodal}>
-            <Image
-              style={styles.bike}
-              source={require("@/assets/images/bike.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.titleContainer} onPress={openmodal}>
-            <Text style={styles.title}>Delivery . Now </Text>
-            <View style={styles.locationName}>
-              <Text style={styles.title}>London</Text>
-              <Ionicons name="chevron-down" size={20} color={Colors.primary} />
-            </View>
-          </TouchableOpacity>
 
-          <TouchableOpacity style={styles.profileButton}>
-            <Ionicons name="person-outline" size={20} color={Colors.primary} />
-          </TouchableOpacity>
-        </View>
-        <SearchBar />
-      </SafeAreaView>
-    </GestureHandlerRootView>
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <BottomSheet ref={bottomSheetRef} />
+
+      <View style={styles.container}>
+        <TouchableOpacity onPress={openModal}>
+          <Image
+            style={styles.bike}
+            source={require("@/assets/images/bike.png")}
+          />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.titleContainer} onPress={openModal}>
+          <Text style={styles.title}>Delivery . Now </Text>
+          <View style={styles.locationName}>
+            <Text style={styles.subtitle}>London</Text>
+            <Ionicons
+              name="chevron-down-outline"
+              size={20}
+              marginLeft={0.5}
+              marginRight={35}
+              color={Colors.primary}
+            />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.Profilebutton}>
+          <Ionicons name="person-outline" size={20} color={Colors.primary} />
+        </TouchableOpacity>
+      </View>
+      <SearchBar />
+    </SafeAreaView>
   );
 };
 
@@ -77,7 +86,6 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#fff",
-    marginTop: 30,
   },
   container: {
     height: 60,
@@ -91,6 +99,8 @@ const styles = StyleSheet.create({
   bike: {
     width: 30,
     height: 30,
+    marginRight: 125,
+    marginLeft: 0.5,
   },
   titleContainer: {
     flex: 1,
@@ -98,20 +108,20 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     color: Colors.medium,
-    fontWeight: "800",
   },
-  locationName: {
-    flexDirection: "row",
-    alignItems: "center",
+  Profilebutton: {
+    backgroundColor: Colors.lightGrey,
+    padding: 10,
+    borderRadius: 50,
+    marginRight: 0.5,
   },
   subtitle: {
     fontSize: 18,
     fontWeight: "bold",
   },
-  profileButton: {
-    backgroundColor: Colors.lightGrey,
-    padding: 10,
-    borderRadius: 50,
+  locationName: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   searchContainer: {
     height: 60,
@@ -135,12 +145,12 @@ const styles = StyleSheet.create({
     padding: 10,
     color: Colors.mediumDark,
   },
-  searchIcon: {
-    paddingLeft: 10,
-  },
   optionButton: {
     padding: 10,
     borderRadius: 50,
+  },
+  searchIcon: {
+    paddingLeft: 10,
   },
 });
 
