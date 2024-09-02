@@ -52,26 +52,28 @@ const CustomHeader = () => {
       <BottomSheet ref={bottomSheetRef} />
 
       <View style={styles.container}>
-        <TouchableOpacity onPress={openModal}>
-          <Image
-            style={styles.bike}
-            source={require("@/assets/images/bike.png")}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.titleContainer} onPress={openModal}>
-          <Text style={styles.title}>Delivery . Now </Text>
-          <View style={styles.locationName}>
-            <Text style={styles.subtitle}>London</Text>
-            <Ionicons
-              name="chevron-down-outline"
-              size={20}
-              marginLeft={0.5}
-              marginRight={35}
-              color={Colors.primary}
+        <View style={styles.row}>
+          <TouchableOpacity onPress={openModal}>
+            <Image
+              style={styles.bike}
+              source={require("@/assets/images/bike.png")}
             />
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.titleContainer} onPress={openModal}>
+            <Text style={styles.title}>Delivery . Now </Text>
+            <View style={styles.locationName}>
+              <Text style={styles.subtitle}>London</Text>
+              <Ionicons
+                name="chevron-down-outline"
+                size={20}
+                marginLeft={0.5}
+                marginRight={35}
+                color={Colors.primary}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
 
         <TouchableOpacity style={styles.Profilebutton}>
           <Ionicons name="person-outline" size={20} color={Colors.primary} />
@@ -86,6 +88,12 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#fff",
+    marginTop: 30,
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 30,
   },
   container: {
     height: 60,
@@ -99,8 +107,9 @@ const styles = StyleSheet.create({
   bike: {
     width: 30,
     height: 30,
-    marginRight: 125,
+    marginRight: -13,
     marginLeft: 0.5,
+    top: 10,
   },
   titleContainer: {
     flex: 1,

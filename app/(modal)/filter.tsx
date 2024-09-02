@@ -33,7 +33,7 @@ const Filter = () => {
 
   const renderItem: ListRenderItem<Category> = ({ item }) => (
     <View>
-      <Text>(item.name)</Text>
+      <Text>{item.name}</Text>
     </View>
   );
   return (
